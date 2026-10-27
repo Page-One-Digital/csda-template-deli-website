@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Copper Crock Deli | Artisanal Provisions, Cheeses & Fine Foods</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display for headings and Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        earth: {
+                            50: '#FBF9F5',
+                            100: '#F2EDE1',
+                            200: '#E4D9C3',
+                            300: '#D1BE9B',
+                            400: '#B89D6C',
+                            500: '#9E804C',
+                            600: '#82653A',
+                            700: '#684F2E',
+                            800: '#543F26',
+                            900: '#42321E',
+                            950: '#261D11',
+                        },
+                        amberGlow: '#C27803',
+                        forest: '#1E3329',
+                        terracotta: '#A84C32',
+                        creamWarm: '#FAF8F5',
+                        copper: '#B8653A'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Precision scroll positioning so jumped sections stay perfectly centered and clear of sticky header */
+        section {
+            scroll-margin-top: 110px;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF8F5;
+            color: #261D11;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2EDE1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9E804C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #684F2E;
+        }
+    </style>
+</head>
+<body class="bg-earth-50 text-earth-900 antialiased selection:bg-copper selection:text-white">
+
+    <!-- Top Announcement & Region Bar -->
+    <div class="bg-earth-900 text-earth-200 text-xs py-2.5 px-4 font-medium transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span>Fresh deli curations stocked weekly • Free nationwide cold-chain delivery on orders over R750</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div id="visitor-region-banner" class="flex items-center gap-1.5 bg-earth-800/80 px-3 py-1 rounded-full border border-earth-700">
+                    <i class="fa-solid fa-earth-africa text-copper"></i>
+                    <span id="region-text">Detecting visitor location...</span>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#stockists" class="hover:text-copper transition">Market Stalls</a>
+                    <span>•</span>
+                    <a href="#wholesale" class="hover:text-copper transition">Deli Wholesale</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header id="site-header" class="sticky top-0 z-50 bg-earth-50/95 backdrop-blur-md border-b border-earth-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-earth-800 flex items-center justify-center text-earth-100 shadow-md group-hover:bg-earth-700 transition">
+                    <i class="fa-solid fa-store text-xl text-copper"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-earth-900 block leading-none">The Copper Crock</span>
+                    <span class="text-[10px] uppercase tracking-widest text-earth-600 font-semibold block mt-1">Artisanal Deli & Provisions</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-7 font-medium text-earth-800 text-sm">
+                <a href="#hero" class="nav-link hover:text-copper transition">Home</a>
+                <a href="#products" class="nav-link hover:text-copper transition">Pantry & Deli Range</a>
+                <a href="#craft" class="nav-link hover:text-copper transition">Our Purveyors</a>
+                <a href="#stockists" class="nav-link hover:text-copper transition">Markets & Stockists</a>
+                <a href="#regional-hub" class="nav-link hover:text-copper transition">Shipping & Region</a>
+                <a href="#wholesale" class="nav-link hover:text-copper transition">Wholesale</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="#products" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-earth-800 hover:bg-earth-700 text-earth-50 text-sm font-medium shadow-md transition transform active:scale-95">
+                    Browse Deli
+                </a>
+                <!-- Mobile menu toggle -->
+                <button id="mobile-menu-btn" class="md:hidden text-earth-800 p-2 focus:outline-none" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-earth-100 border-b border-earth-200 px-6 py-4 space-y-3 font-medium">
+            <a href="#hero" class="block py-2 text-earth-800 hover:text-copper mobile-link">Home</a>
+            <a href="#products" class="block py-2 text-earth-800 hover:text-copper mobile-link">Pantry & Deli Range</a>
+            <a href="#craft" class="block py-2 text-earth-800 hover:text-copper mobile-link">Our Purveyors</a>
+            <a href="#stockists" class="block py-2 text-earth-800 hover:text-copper mobile-link">Markets & Stockists</a>
+            <a href="#regional-hub" class="block py-2 text-earth-800 hover:text-copper mobile-link">Shipping & Region</a>
+            <a href="#wholesale" class="block py-2 text-earth-800 hover:text-copper mobile-link">Wholesale</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-earth-100 to-earth-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-earth-200/80 border border-earth-300 text-earth-800 text-xs font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-basket-shopping text-copper"></i> Master Deli & Provisions Purveyor
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-earth-950 leading-tight">
+                        Curated Artisan Cheeses & <span class="italic font-normal text-copper">Pantry Delicacies</span>
+                    </h1>
+                    <p class="text-earth-700 text-lg sm:text-xl font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Welcome to The Copper Crock Deli. Discover hand-milled compound butters, cave-aged cheeses, dry-cured charcuterie, zero-water fruit relishes, and small-batch pantry staples.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-full bg-earth-800 hover:bg-earth-900 text-earth-50 font-semibold shadow-lg hover:shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3">
+                            <span>Explore Deli Shelves</span>
+                            <i class="fa-solid fa-arrow-down text-sm"></i>
+                        </a>
+                        <a href="#stockists" class="w-full sm:w-auto px-8 py-4 rounded-full bg-earth-200 hover:bg-earth-300 text-earth-900 font-semibold transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-store text-copper"></i> Visit Market Stalls
+                        </a>
+                    </div>
+                    <!-- Trust badges -->
+                    <div class="pt-8 border-t border-earth-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-earth-600 font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-cheese text-amber-700 text-base"></i> Cave-Aged Cheeses
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-jar text-copper text-base"></i> Zero-Water Relishes & Butters
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-award text-copper text-base"></i> Artisan Farm Sourced
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Hero Showcase -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-copper/20 to-earth-300/40 rounded-3xl blur-xl -z-10"></div>
+                        <div class="bg-white rounded-3xl p-6 shadow-2xl border border-earth-200 space-y-6">
+                            <div class="relative h-72 rounded-2xl overflow-hidden bg-earth-100 flex items-center justify-center">
+                                <img src="https://placehold.co/600x450/42321E/F2EDE1?text=The+Copper+Crock+Deli" alt="Deli spread showcase" class="w-full h-full object-cover transform hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x450/82653A/FAF8F5?text=Artisanal+Deli'">
+                                <div class="absolute top-3 right-3 bg-earth-900/80 backdrop-blur-md text-earth-100 text-xs px-3 py-1.5 rounded-full font-medium">
+                                    Weekly Selection #12
+                                />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs uppercase tracking-widest text-copper font-bold">Featured Deli Hamper</span>
+                                    <span class="text-sm font-semibold text-earth-800">Assorted Provisions</span>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-earth-900">Aged Cheddar, Fig Relish & Churned Butters</h3>
+                                <p class="text-xs text-earth-600">Hand-selected delicacies paired for the ultimate weekend charcuterie board and tasting experience.</p>
+                            </div>
+                            <div class="pt-4 border-t border-earth-100 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <span class="w-8 h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-bold border-2 border-white" title="Cheeses">🧀</span>
+                                    <span class="w-8 h-8 rounded-full bg-red-800 text-white flex items-center justify-center text-xs font-bold border-2 border-white" title="Relishes">🍯</span>
+                                    <span class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center text-xs font-bold border-2 border-white" title="Butters">🧈</span>
+                                </div>
+                                <a href="#products" class="text-xs font-bold text-earth-900 hover:text-copper flex items-center gap-1">
+                                    Explore Menu <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Region-Aware Dynamic Info Banner -->
+    <section id="regional-hub" class="py-12 bg-earth-100 border-y border-earth-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-earth-200">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded bg-copper/10 text-copper font-bold text-xs uppercase tracking-wider">Smart Location Assistant</span>
+                            <span id="detected-country-badge" class="text-xs text-earth-600 font-medium">Visitor detected</span>
+                        </div>
+                        <h2 class="font-serif text-2xl font-bold text-earth-900" id="region-title">Tailored Shipping & Local Availability</h2>
+                        <p class="text-earth-700 text-sm max-w-2xl" id="region-description">We automatically adjust our currency, market pickup locations, and cold-chain courier guidelines based on your geographic location.</p>
+                    </div>
+                    <div class="bg-earth-50 p-4 rounded-xl border border-earth-200 min-w-[280px] space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-earth-600">
+                            <span>Currency:</span>
+                            <span id="region-currency" class="text-earth-900">ZAR (R)</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold text-earth-600">
+                            <span>Fulfillment:</span>
+                            <span id="region-shipping" class="text-earth-900">Nationwide Cold-Chain Courier</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold text-earth-600">
+                            <span>Primary Markets:</span>
+                            <span id="region-stockist-info" class="text-earth-900">Gauteng & Bus Stop 7 Market</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Grid Section -->
+    <section id="products" class="py-20 bg-earth-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-copper font-bold block">The Deli Pantry</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-earth-950">Artisanal Cheeses, Butters, Relishes & Provisions</h2>
+                <p class="text-earth-700 text-base">Hand-curated from master cheesemakers, small-batch farms, and curing cellars. Prepared with absolute commitment to flavor.</p>
+            </div>
+
+            <!-- Product Category Tabs -->
+            <div class="flex justify-center mb-12 flex-wrap gap-2">
+                <div class="inline-flex bg-earth-200/70 p-1.5 rounded-full space-x-1">
+                    <button onclick="filterProducts('all')" id="btn-all" class="px-5 py-2 rounded-full text-xs font-bold transition bg-earth-800 text-white shadow-sm">All Deli Items</button>
+                    <button onclick="filterProducts('cheese')" id="btn-cheese" class="px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950">Cheeses</button>
+                    <button onclick="filterProducts('butter')" id="btn-butter" class="px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950">Compound Butters</button>
+                    <button onclick="filterProducts('relish')" id="btn-relish" class="px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950">Zero-Water Relishes</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+                
+                <!-- Product 1: Cave-Aged Meester Gouda (Cheese) -->
+                <div class="product-card cheese bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-earth-200 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-100 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/544026/FAF8F5?text=Cave-Aged+Meester+Gouda" alt="Cave-Aged Meester Gouda" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/82653A/FAF8F5?text=Aged+Gouda'">
+                            <span class="absolute top-3 left-3 bg-earth-900/90 text-earth-100 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Aged 24 Months</span>
+                            <span class="absolute top-3 right-3 bg-copper text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="price-val" data-zar="R140" data-usd="$9.20" data-eur="€8.40">R140</span> / 250g</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-earth-500 font-bold">Artisanal Cheese • 250g Wedge</div>
+                            <h3 class="font-serif text-2xl font-bold text-earth-900">Cave-Aged Meester Gouda</h3>
+                            <p class="text-earth-700 text-sm leading-relaxed">Matured for 24 months in historic stone cellars. Develops gorgeous protein crystals with intense butterscotch, hazelnut, and caramel notes.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Raw Cow Milk</span>
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Aged 24 Mos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-100 mt-4">
+                        <span class="text-xs text-earth-600 font-medium">Refrigerated Chilled</span>
+                        <button onclick="openOrderModal('Cave-Aged Meester Gouda', 'R140')" class="px-4 py-2 bg-earth-800 hover:bg-earth-700 text-earth-50 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-basket-shopping"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2: Garlic & Herb Butter -->
+                <div class="product-card butter bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-earth-200 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-100 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/36453B/FAF8F5?text=Garlic+%26+Herb+Butter" alt="Garlic & Herb Compound Butter" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/82653A/FAF8F5?text=Garlic+%26+Herb'">
+                            <span class="absolute top-3 left-3 bg-earth-900/90 text-earth-100 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Best Seller</span>
+                            <span class="absolute top-3 right-3 bg-copper text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="price-val" data-zar="R85" data-usd="$5.50" data-eur="€5.00">R85</span> / 160g</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-earth-500 font-bold">Compound Butter • 160g Jar</div>
+                            <h3 class="font-serif text-2xl font-bold text-earth-900">Garlic & Herb Butter</h3>
+                            <p class="text-earth-700 text-sm leading-relaxed">Roasted organic garlic cloves folded with hand-churned cultured cream butter, fresh flat-leaf parsley, thyme, and cracked black pepper.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Garlic</span>
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Cultured Cream</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-100 mt-4">
+                        <span class="text-xs text-earth-600 font-medium">Shelf Life: 6 mos chilled</span>
+                        <button onclick="openOrderModal('Garlic & Herb Butter', 'R85')" class="px-4 py-2 bg-earth-800 hover:bg-earth-700 text-earth-50 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-basket-shopping"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3: Smoked Chilli Butter -->
+                <div class="product-card butter bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-earth-200 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-100 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/5A2A27/FAF8F5?text=Smoked+Chilli+Butter" alt="Smoked Chilli Compound Butter" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/82653A/FAF8F5?text=Smoked+Chilli'">
+                            <span class="absolute top-3 left-3 bg-red-800 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Bold & Fiery</span>
+                            <span class="absolute top-3 right-3 bg-copper text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="price-val" data-zar="R90" data-usd="$5.90" data-eur="€5.40">R90</span> / 160g</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-earth-500 font-bold">Compound Butter • 160g Jar</div>
+                            <h3 class="font-serif text-2xl font-bold text-earth-900">Smoked Chilli Butter</h3>
+                            <p class="text-earth-700 text-sm leading-relaxed">Pecan wood-smoked chipotle and red habanero peppers blended seamlessly with creamy butter and a touch of smoked sea salt.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Chipotle</span>
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Smoked Salt</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-100 mt-4">
+                        <span class="text-xs text-earth-600 font-medium">Shelf Life: 6 mos chilled</span>
+                        <button onclick="openOrderModal('Smoked Chilli Butter', 'R90')" class="px-4 py-2 bg-earth-800 hover:bg-earth-700 text-earth-50 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-basket-shopping"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4: Zero-Water Fig & Walnut Relish -->
+                <div class="product-card relish bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-earth-200 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-100 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/422D30/FAF8F5?text=Fig+%26+Walnut+Relish" alt="Zero-Water Fig and Walnut Relish" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/82653A/FAF8F5?text=Fig+%26+Walnut+Relish'">
+                            <span class="absolute top-3 left-3 bg-terracotta text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Zero-Water Artisan</span>
+                            <span class="absolute top-3 right-3 bg-copper text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="price-val" data-zar="R110" data-usd="$7.20" data-eur="€6.60">R110</span> / 200g</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-earth-500 font-bold">Fruit & Nut Relish • 200g Jar</div>
+                            <h3 class="font-serif text-2xl font-bold text-earth-900">Fig & Walnut Relish</h3>
+                            <p class="text-earth-700 text-sm leading-relaxed">Sun-ripened Smyrna figs slow-reduced in natural fruit juices and balsamic vinegar with toasted walnuts. Zero water added for maximum flavor density.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Smyrna Figs</span>
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Toasted Walnuts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-100 mt-4">
+                        <span class="text-xs text-earth-600 font-medium">Pantry stable</span>
+                        <button onclick="openOrderModal('Fig & Walnut Relish', 'R110')" class="px-4 py-2 bg-earth-800 hover:bg-earth-700 text-earth-50 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-basket-shopping"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 5: Organic Truffle Pecorino (Cheese) -->
+                <div class="product-card cheese bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-earth-200 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-100 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/614C35/FAF8F5?text=Truffle+Pecorino" alt="Organic Truffle Pecorino" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/82653A/FAF8F5?text=Truffle+Pecorino'">
+                            <span class="absolute top-3 left-3 bg-amber-800 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Infused with Truffle</span>
+                            <span class="absolute top-3 right-3 bg-copper text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="price-val" data-zar="R165" data-usd="$10.80" data-eur="€9.90">R165</span> / 200g</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-earth-500 font-bold">Artisanal Cheese • 200g Wedge</div>
+                            <h3 class="font-serif text-2xl font-bold text-earth-900">Organic Truffle Pecorino</h3>
+                            <p class="text-earth-700 text-sm leading-relaxed">Pecorino cheese infused with generous shavings of black summer truffle. Imparts an earthy, aromatic richness that elevates any antipasto platter.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Sheep Milk</span>
+                                <span class="px-2 py-0.5 bg-earth-100 text-earth-800 text-[11px] rounded font-medium">Black Truffle</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-100 mt-4">
+                        <span class="text-xs text-earth-600 font-medium">Refrigerated Chilled</span>
+                        <button onclick="openOrderModal('Organic Truffle Pecorino', 'R165')" class="px-4 py-2 bg-earth-800 hover:bg-earth-700 text-earth-50 rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-basket-shopping"></i> Add to Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 6: Artisanal Deli Tasting Hamper -->
+                <div class="product-card cheese butter relish bg-earth-900 text-earth-100 rounded-2xl overflow-hidden shadow-xl border border-earth-700 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-64 bg-earth-950 overflow-hidden group">
+                            <img src="https://placehold.co/600x400/261D11/F2EDE1?text=Deli+Tasting+Hamper" alt="Artisanal Deli Tasting Hamper" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/42321E/FAF8F5?text=Deli+Hamper'">
+                            <span class="absolute top-3 left-3 bg-copper text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">Curated Deli Box</span>
+                            <span class="absolute top-3 right-3 bg-earth-800 text-copper text-xs font-bold px-2.5 py-1 rounded-full border border-earth-600"><span class="price-val" data-zar="R450" data-usd="$29.50" data-eur="€27.00">R450</span> / Hamper Set</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs uppercase tracking-wider text-copper font-bold">The Master’s Selection</div>
+                            <h3 class="font-serif text-2xl font-bold text-white">Copper Crock Connoisseur Hamper</h3>
+                            <p class="text-earth-300 text-sm leading-relaxed">Includes a wedge of Cave-Aged Gouda, Garlic & Herb Butter, Fig & Walnut Relish, and artisanal crackers packaged in a pine presentation box.</p>
+                            <div class="pt-2 flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 bg-earth-800 text-earth-200 text-[11px] rounded font-medium">Pine Gift Box</span>
+                                <span class="px-2 py-0.5 bg-earth-800 text-earth-200 text-[11px] rounded font-medium">Full Assortment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-earth-800 mt-4">
+                        <span class="text-xs text-earth-400 font-medium">Free Gift Wrapping</span>
+                        <button onclick="openOrderModal('Copper Crock Connoisseur Hamper', 'R450')" class="px-4 py-2 bg-copper hover:bg-amber-600 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-gift"></i> Add Hamper
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Craft & Purveyors Brand Story Section -->
+    <section id="craft" class="py-24 bg-earth-100 relative overflow-hidden border-y border-earth-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Story Text -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-copper font-bold">Our Purveyors & Philosophy</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-earth-950 leading-tight">
+                        Rooted in European Tradition, Celebrating Local Artisans
+                    </h2>
+                    <p class="text-earth-800 text-base leading-relaxed">
+                        At The Copper Crock Deli, we scour pastoral dairy valleys, historic aging cellars, and small independent smokehouses to bring you provisions of uncompromising integrity. Every wedge of cheese and batch of butter reflects generations of master craftsmanship.
+                    </p>
+                    <p class="text-earth-700 text-sm leading-relaxed">
+                        Our relishes and preserves adhere strictly to a <strong class="text-earth-900">zero-water principle</strong>. We simmer seasonal orchard fruits in their natural juices without water or artificial additives, achieving unmatched depth and complexity for your charcuterie boards.
+                    </p>
+
+                    <!-- Process Steps -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="bg-white p-4 rounded-xl border border-earth-200 shadow-sm">
+                            <div class="w-8 h-8 rounded-lg bg-earth-800 text-copper flex items-center justify-center font-bold text-sm mb-2">01</div>
+                            <h4 class="font-serif font-bold text-earth-900 text-base mb-1">Cave Aged</h4>
+                            <p class="text-xs text-earth-600">Cheeses matured in stone cellars for complex crystalline texture.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-earth-200 shadow-sm">
+                            <div class="w-8 h-8 rounded-lg bg-earth-800 text-copper flex items-center justify-center font-bold text-sm mb-2">02</div>
+                            <h4 class="font-serif font-bold text-earth-900 text-base mb-1">Small Batch</h4>
+                            <p class="text-xs text-earth-600">Hand-churned butters and preserves crafted weekly.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-earth-200 shadow-sm">
+                            <div class="w-8 h-8 rounded-lg bg-earth-800 text-copper flex items-center justify-center font-bold text-sm mb-2">03</div>
+                            <h4 class="font-serif font-bold text-earth-900 text-base mb-1">Zero-Water</h4>
+                            <p class="text-xs text-earth-600">Preserves reduced entirely in pure fruit juices.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Storytelling Images -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="rounded-2xl overflow-hidden shadow-lg h-64 bg-earth-200">
+                            <img src="https://placehold.co/400x500/684F2E/FAF8F5?text=Cheese+Cellar" alt="Cheese aging cellar" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x500/82653A/FAF8F5?text=Aging+Cellar'">
+                        </div>
+                        <div class="bg-earth-900 text-earth-100 p-6 rounded-2xl shadow-lg space-y-2">
+                            <i class="fa-solid fa-quote-left text-copper text-2xl"></i>
+                            <p class="text-xs italic text-earth-300">"Good food brings people around the table. We curate only what we are proud to serve our own family."</p>
+                            <span class="text-[11px] font-bold tracking-wider uppercase text-copper block pt-2">— Master Deli Curator</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-earth-200 space-y-3">
+                            <div class="w-10 h-10 rounded-full bg-copper/10 text-copper flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                            <h4 class="font-serif font-bold text-earth-900 text-lg">Ethical Farm Partners</h4>
+                            <p class="text-xs text-earth-600">Collaborating directly with free-range dairy farms and artisan cheesemakers across the region.</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg h-64 bg-earth-200">
+                            <img src="https://placehold.co/400x500/543F26/FAF8F5?text=Deli+Counter" alt="Deli counter spread" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x500/82653A/FAF8F5?text=Deli+Counter'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stockist / Market Locator List & Wholesale Inquiry Section -->
+    <section id="stockists" class="py-20 bg-earth-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-copper font-bold block">Where to Find Us</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-earth-950">Weekend Market Stalls & Deli Stockists</h2>
+                <p class="text-earth-700 text-base">Visit our stalls at permanent weekend artisanal markets or find our refrigerated provisions on shelves of boutique grocers.</p>
+            </div>
+
+            <!-- Grid Layout for Stockists and Wholesale Form -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Stockist / Market List -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-serif text-2xl font-bold text-earth-900">Weekend Markets & Stalls</h3>
+                        <span class="text-xs bg-earth-200 text-earth-800 font-semibold px-3 py-1 rounded-full">Updated Weekly</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Market 1: Bus Stop 7 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-earth-200 hover:border-copper transition duration-300">
+                            <div class="flex justify-between items-start gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-copper/10 text-copper font-bold text-[10px] uppercase rounded">Permanent Stall</span>
+                                        <span class="text-xs text-earth-500 font-medium">Gauteng, South Africa</span>
+                                    </div>
+                                    <h4 class="font-serif font-bold text-earth-900 text-xl">Bus Stop 7 Artisanal Market</h4>
+                                    <p class="text-xs text-earth-700 flex items-center gap-1.5 pt-1">
+                                        <i class="fa-regular fa-clock text-copper"><span>Saturdays & Sundays: 08:00 – 14:00</span></i>
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-earth-100 flex items-center justify-center text-earth-800 flex-shrink-0">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-earth-600 mt-3 pt-3 border-t border-earth-100">
+                                Visit our refrigerated deli trailer for cheese tastings, freshly sliced charcuterie, and chilled compound butters.
+                            </p>
+                        </div>
+
+                        <!-- Market 2: Irene Village Market -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-earth-200 hover:border-copper transition duration-300">
+                            <div class="flex justify-between items-start gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-earth-200 text-earth-800 font-bold text-[10px] uppercase rounded">Bi-Weekly</span>
+                                        <span class="text-xs text-earth-500 font-medium">Centurion, South Africa</span>
+                                    </div>
+                                    <h4 class="font-serif font-bold text-earth-900 text-xl">Irene Village Market</h4>
+                                    <p class="text-xs text-earth-700 flex items-center gap-1.5 pt-1">
+                                        <i class="fa-regular fa-clock text-copper"><span>1st and 3rd Saturday of every month</span></i>
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-earth-100 flex items-center justify-center text-earth-800 flex-shrink-0">
+                                    <i class="fa-solid fa-shop"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-earth-600 mt-3 pt-3 border-t border-earth-100">
+                                Set under the historic oak trees. Taste our cave-aged cheeses paired with warm freshly baked sourdough and fig relish.
+                            </p>
+                        </div>
+
+                        <!-- Stockist 3: The Gourmet Grocer -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-earth-200 hover:border-copper transition duration-300">
+                            <div class="flex justify-between items-start gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 bg-green-100 text-green-800 font-bold text-[10px] uppercase rounded">Retail Partner</span>
+                                        <span class="text-xs text-earth-500 font-medium">Johannesburg & Pretoria</span>
+                                    </div>
+                                    <h4 class="font-serif font-bold text-earth-900 text-xl">The Artisan Deli Collective</h4>
+                                    <p class="text-xs text-earth-700 flex items-center gap-1.5 pt-1">
+                                        <i class="fa-solid fa-location-dot text-copper"><span>Multiple Store Locations</span></i>
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-earth-100 flex items-center justify-center text-earth-800 flex-shrink-0">
+                                    <i class="fa-solid fa-basket-shopping"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-earth-600 mt-3 pt-3 border-t border-earth-100">
+                                Stocked daily in refrigerated cheese & dairy sections. Ask for The Copper Crock Deli provisions by name.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wholesale Inquiry Form -->
+                <div id="wholesale" class="lg:col-span-6">
+                    <div class="bg-earth-900 text-earth-100 p-8 rounded-3xl shadow-xl border border-earth-800 space-y-6">
+                        <div class="space-y-2">
+                            <span class="text-xs uppercase tracking-widest text-copper font-bold">Trade Partnerships</span>
+                            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Deli Wholesale & Stockist Inquiries</h3>
+                            <p class="text-earth-300 text-xs sm:text-sm">Are you a deli, boutique grocer, restaurant, or wine farm looking to stock or serve award-winning cave-aged cheeses and artisanal provisions?</p>
+                        </div>
+
+                        <form id="wholesale-form" onsubmit="handleWholesaleSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-semibold text-earth-300">Your Name</label>
+                                    <input type="text" required class="w-full bg-earth-800 border border-earth-700 rounded-xl px-4 py-3 text-sm text-white placeholder-earth-500 focus:outline-none focus:border-copper transition" placeholder="Jane Doe">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-semibold text-earth-300">Deli / Business Name</label>
+                                    <input type="text" required class="w-full bg-earth-800 border border-earth-700 rounded-xl px-4 py-3 text-sm text-white placeholder-earth-500 focus:outline-none focus:border-copper transition" placeholder="The Gourmet Market">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-semibold text-earth-300">Email Address</label>
+                                    <input type="email" required class="w-full bg-earth-800 border border-earth-700 rounded-xl px-4 py-3 text-sm text-white placeholder-earth-500 focus:outline-none focus:border-copper transition" placeholder="jane@gourmet.co.za">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-semibold text-earth-300">Phone Number</label>
+                                    <input type="tel" required class="w-full bg-earth-800 border border-earth-700 rounded-xl px-4 py-3 text-sm text-white placeholder-earth-500 focus:outline-none focus:border-copper transition" placeholder="+27 82 123 4567">
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-semibold text-earth-300">Estimated Monthly Volume / Product Interest</label>
+                                <textarea rows="3" required class="w-full bg-earth-800 border border-earth-700 rounded-xl px-4 py-3 text-sm text-white placeholder-earth-500 focus:outline-none focus:border-copper transition" placeholder="Tell us about your deli location and cheese/butter requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 rounded-xl bg-copper hover:bg-amber-600 text-white font-bold text-sm shadow-lg transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Submit Wholesale Application
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-earth-950 text-earth-300 pt-16 pb-12 border-t border-earth-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-earth-800 flex items-center justify-center text-earth-100">
+                            <i class="fa-solid fa-store text-copper"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold text-white">The Copper Crock Deli</span>
+                    </div>
+                    <p class="text-xs text-earth-400 max-w-sm leading-relaxed">
+                        Hand-curated cave-aged cheeses, artisan compound butters, charcuterie, and zero-water fruit relishes. Sourced from master purveyors with uncompromising passion.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-earth-900 hover:bg-copper hover:text-white flex items-center justify-center text-earth-300 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-earth-900 hover:bg-copper hover:text-white flex items-center justify-center text-earth-300 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-earth-900 hover:bg-copper hover:text-white flex items-center justify-center text-earth-300 transition"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-serif font-bold text-sm uppercase tracking-wider">Navigation</h4>
+                    <ul class="space-y-2 text-xs font-medium">
+                        <li><a href="#hero" class="hover:text-copper transition">Home</a></li>
+                        <li><a href="#products" class="hover:text-copper transition">Pantry & Deli Range</a></li>
+                        <li><a href="#craft" class="hover:text-copper transition">Our Purveyors</a></li>
+                        <li><a href="#stockists" class="hover:text-copper transition">Markets & Stockists</a></li>
+                    </ul>
+                </div>
+
+                <!-- Region & Shipping -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-serif font-bold text-sm uppercase tracking-wider">Regions</h4>
+                    <ul class="space-y-2 text-xs font-medium">
+                        <li><span class="text-copper">South Africa</span> (Home Base)</li>
+                        <li><span>SADC Region</span> (Cold-Chain Available)</li>
+                        <li><span>International</span> (Wholesale Only)</li>
+                        <li><a href="#regional-hub" class="hover:text-copper transition">Check Visitor Status</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-serif font-bold text-sm uppercase tracking-wider">Deli Journal</h4>
+                    <p class="text-xs text-earth-400">Subscribe for weekly cheese arrivals and market stall schedules.</p>
+                    <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                        <input type="email" required placeholder="your.email@domain.com" class="w-full bg-earth-900 border border-earth-800 rounded-lg px-3 py-2 text-xs text-white placeholder-earth-600 focus:outline-none focus:border-copper">
+                        <button type="submit" class="w-full py-2 bg-earth-800 hover:bg-copper hover:text-white text-earth-200 text-xs font-bold rounded-lg transition">Join List</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-earth-900 flex flex-col sm:flex-row justify-between items-center text-xs text-earth-500 gap-4">
+                <p>&copy; 2026 The Copper Crock Deli (Pty) Ltd. All rights reserved. Handcrafted provisions.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-earth-300 transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-earth-300 transition">Terms of Service</a>
+                    <a href="#" class="hover:text-earth-300 transition">Cold Chain Guarantee</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Order / Inquiry Modal -->
+    <div id="order-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative space-y-6 border border-earth-200 transform transition-all">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-earth-100 hover:bg-earth-200 text-earth-800 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="space-y-2">
+                <span class="text-xs uppercase tracking-widest text-copper font-bold">Secure Deli Order Request</span>
+                <h3 id="modal-product-title" class="font-serif text-2xl font-bold text-earth-900">Order Provision</h3>
+                <p class="text-xs text-earth-600">Complete your details below and our deli fulfillment team will contact you to confirm chilled delivery or weekend market pickup.</p>
+            </div>
+
+            <form onsubmit="handleOrderSubmit(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-earth-700">Selected Item & Price</label>
+                    <input type="text" id="modal-item-display" readonly class="w-full bg-earth-100 border border-earth-200 rounded-xl px-4 py-2.5 text-sm font-bold text-earth-900">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-earth-700">Your Full Name</label>
+                    <input type="text" required class="w-full bg-earth-50 border border-earth-200 rounded-xl px-4 py-2.5 text-sm text-earth-900 focus:outline-none focus:border-copper">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-earth-700">Phone or WhatsApp Number</label>
+                    <input type="tel" required class="w-full bg-earth-50 border border-earth-200 rounded-xl px-4 py-2.5 text-sm text-earth-900 focus:outline-none focus:border-copper" placeholder="e.g. 082 555 1234">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-earth-700">Fulfillment Preference</label>
+                    <select class="w-full bg-earth-50 border border-earth-200 rounded-xl px-4 py-2.5 text-sm text-earth-900 focus:outline-none focus:border-copper">
+                        <option>Nationwide Cold-Chain Courier</option>
+                        <option>Collect at Bus Stop 7 Market Stall (Saturday)</option>
+                        <option>Collect at Irene Village Market Stall</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-earth-900 hover:bg-earth-800 text-white font-bold rounded-xl shadow transition">
+                    Confirm Order Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-earth-900 text-earth-100 px-6 py-4 rounded-2xl shadow-2xl border border-earth-700 flex items-center gap-3 transform translate-y-32 opacity-0 transition-all duration-300">
+        <div class="w-8 h-8 rounded-full bg-copper text-white flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <h5 class="font-bold text-sm text-white" id="toast-title">Request Received</h5>
+            <p class="text-xs text-earth-300" id="toast-desc">We will get back to you shortly.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Product Filtering Logic
+        function filterProducts(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const btnAll = document.getElementById('btn-all');
+            const btnCheese = document.getElementById('btn-cheese');
+            const btnButter = document.getElementById('btn-butter');
+            const btnRelish = document.getElementById('btn-relish');
+
+            // Reset button styles
+            btnAll.className = "px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950";
+            if(btnCheese) btnCheese.className = "px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950";
+            btnButter.className = "px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950";
+            btnRelish.className = "px-5 py-2 rounded-full text-xs font-bold transition text-earth-700 hover:text-earth-950";
+
+            if (category === 'all') {
+                btnAll.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-earth-800 text-white shadow-sm";
+                cards.forEach(card => card.style.display = 'flex');
+            } else if (category === 'cheese') {
+                if(btnCheese) btnCheese.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-earth-800 text-white shadow-sm";
+                cards.forEach(card => {
+                    if (card.classList.contains('cheese')) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            } else if (category === 'butter') {
+                btnButter.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-earth-800 text-white shadow-sm";
+                cards.forEach(card => {
+                    if (card.classList.contains('butter')) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            } else if (category === 'relish') {
+                btnRelish.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-earth-800 text-white shadow-sm";
+                cards.forEach(card => {
+                    if (card.classList.contains('relish')) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Order Modal Controls
+        function openOrderModal(productName, price) {
+            const modal = document.getElementById('order-modal');
+            const titleInput = document.getElementById('modal-item-display');
+            titleInput.value = productName + ' (' + price + ')';
+            modal.classList.remove('hidden');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+        }
+
+        // Form Submission Handlers with Toast
+        function showToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            closeOrderModal();
+            showToast('Deli Order Request Received!', 'Our fulfillment team will contact you shortly to arrange chilled delivery or market stall pickup.');
+        }
+
+        function handleWholesaleSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Application Submitted!', 'Thank you for your deli wholesale interest. Our trade manager will email our distributor catalogue.');
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Subscribed Successfully!', 'Welcome to The Copper Crock deli journal.');
+        }
+
+        // Dynamic Visitor Region / Country Personalization
+        window.addEventListener('DOMContentLoaded', () => {
+            const regionText = document.getElementById('region-text');
+            const detectedBadge = document.getElementById('detected-country-badge');
+            const regionTitle = document.getElementById('region-title');
+            const regionDescription = document.getElementById('region-description');
+            const regionCurrency = document.getElementById('region-currency');
+            const regionShipping = document.getElementById('region-shipping');
+            const regionStockistInfo = document.getElementById('region-stockist-info');
+
+            // Simulate geolocation intelligence based on timezone or language
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            let visitorCountry = 'South Africa';
+            let currency = 'ZAR (R)';
+            let shippingInfo = 'Nationwide Cold-Chain Courier (Free > R750)';
+            let stockistInfo = 'Gauteng & Bus Stop 7 Market';
+
+            if (timezone.includes('Europe') || timezone.includes('London')) {
+                visitorCountry = 'Europe / UK Visitor';
+                currency = 'EUR (€) / GBP (£)';
+                shippingInfo = 'International Specialty Export Orders Available';
+                stockistInfo = 'Select European Specialty Delis';
+                // Adjust prices to EUR
+                document.querySelectorAll('.price-val').forEach(el => {
+                    if (el.getAttribute('data-eur')) {
+                        el.innerText = el.getAttribute('data-eur');
+                    }
+                });
+            } else if (timezone.includes('America')) {
+                visitorCountry = 'North America Visitor';
+                currency = 'USD ($)';
+                shippingInfo = 'Global Artisanal Shipping Partner';
+                stockistInfo = 'US Specialty Food Importers';
+                // Adjust prices to USD
+                document.querySelectorAll('.price-val').forEach(el => {
+                    if (el.getAttribute('data-usd')) {
+                        el.innerText = el.getAttribute('data-usd');
+                    }
+                });
+            } else {
+                visitorCountry = 'South Africa (Home Base)';
+                currency = 'ZAR (R)';
+                shippingInfo = 'Nationwide Overnight Cold-Chain Courier';
+                stockistInfo = 'Bus Stop 7 & Irene Markets';
+            }
+
+            if (regionText) regionText.innerText = visitorCountry;
+            if (detectedBadge) detectedBadge.innerText = `Detected Region: ${visitorCountry}`;
+            if (regionTitle) regionTitle.innerText = `Tailored for ${visitorCountry}`;
+            if (regionDescription) regionDescription.innerText = `We have optimized your shopping currency to ${currency} and highlighted local stockists and cold-chain shipping rules relevant to your visit.`;
+            if (regionCurrency) regionCurrency.innerText = currency;
+            if (regionShipping) regionShipping.innerText = shippingInfo;
+            if (regionStockistInfo) regionStockistInfo.innerText = stockistInfo;
+        });
+    </script>
+</body>
+</html>
